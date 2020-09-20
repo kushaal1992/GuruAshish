@@ -1,5 +1,5 @@
 export class Dimension {
-    length: null;
-    height: null;
-    width: null;
+    length: number;
+    height: number;
+    width: number;
 }

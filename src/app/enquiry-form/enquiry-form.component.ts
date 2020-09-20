@@ -79,13 +79,45 @@ export class EnquiryFormComponent implements OnInit {
   public width = null;
   public result = null;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private fb1: FormBuilder) { }
     eForm = this.fb.group({
+      name: [''],
+      email: [''],
+      phoneNumber: [''],
+      paymentTerms: this.fb.group({
+        prepaid: [''],
+        collect: ['']
+      }),
       mot: [''],
-      type: ['']
+      incoTerms: [''],
+      type: [''],
+      pOL: [''],
+      pD: [''],
+      aOL: [''],
+      aD: [''],
+      grossWeight: [''],
+      unit: [''],
+      shipperName: [''],
+      shipperEmail: [''],
+      pA: [''],
+      dA: [''],
+      commodity: [''],
+      transitInsurance: [''],
+      CBM: [null],
+      calculateCBM: this.fb.group({
+        length: [null],
+        unitL: [''],
+        height: [null],
+        unitH: [''],
+        width: [null],
+        unitW: [''],
+        numberOfPackages: [''],
+        CBMValue: [null]
+      }),
+      comments: ['']
 
     })
-    cbmForm = this.fb.group({
+    cbmForm = this.fb1.group({
         length: [null],
         height: [null],
         width: [null],
@@ -115,7 +147,7 @@ export class EnquiryFormComponent implements OnInit {
 
   onAddDimension(){
     this.dimension = new Dimension
-    return this.formArray.push(this.cbmForm)
+    return this.formArray.push(this.dimension)
   }
 
   onReset(){

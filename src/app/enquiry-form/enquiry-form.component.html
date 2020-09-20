@@ -1,0 +1,257 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="title">
+            <h1 style="text-align: center;">Enquire Now</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <form [formGroup]="eForm">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label class="subTitle">Contact Information<span class="hr"> _______________________________________________________</span></label>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" name="email">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Phone Number</label>
+                                <input type="number" class="form-control" name="phoneNumber">
+                            </div>
+                        </div>
+                    <div class="form-row" style="margin-top: 15px;">
+                        <div>
+                            <span>Payment Terms</span>
+                        </div>
+                        <div class="form-check form-check-inline" style="padding-left: 8px;">
+                            <input class="form-check-input" type="radio">
+                            <label class="form-check-label" for="inlineRadio1">Prepaid</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio">
+                            <label class="form-check-label" for="inlineRadio2">Collect</label>
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+            <div class="form-row" style="margin-top: 50px;">
+                <div class="col-md-6">
+                    <label class="subTitle">Transport Information<span class="hr"> _______________________________________________________</span></label>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="exampleFormControlSelect1">Mode of Transport</label>
+                            <select class="form-control" formControlName="mot" name="mot">
+                              <option *ngFor="let mode of modes" [value]="mode.value">{{mode.viewValue}}</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-8" style="padding-left: 125px;">
+                            <label for="exampleFormControlSelect1">INCO Terms</label>
+                            <select class="form-control">
+                              <option *ngFor="let inco of incos" [value]="inco.value">{{inco.viewValue}}</option>
+                            </select>
+                          </div>
+                          <div *ngIf="eForm.value.mot == 'Sea'" class="form-group col-md-3">
+                            <label for="">Type of Load</label>
+                            <select class="form-control" formControlName="type" name="type">
+                                <option *ngFor="let type of typeOfLoad" [value]="type.value">{{ type.viewValue }}</option>
+                            </select>
+                        </div>
+                        <div class="form-row" *ngIf="eForm.value.mot == 'Air'">
+                            <div class="form-group col-md-5">
+                                <label>Airport of Loading</label>
+                                <input type="text" class="form-control" formControlName="airportOfLoading">
+                            </div>
+                            <div class="form-group col-md-7" style="padding-left: 60px;">
+                                <label>Airport Destination</label>
+                                <input type="text" class="form-control" formControlName="airportDestination">
+                            </div>
+                        </div>
+                        <div class="form-row" *ngIf="eForm.value.mot == 'Sea'">
+                            <div class="form-group col-md-5">
+                                <label>Port of Loading</label>
+                                <input type="text" class="form-control" formControlName="portOfLoading">
+                            </div>
+                            <div class="form-group col-md-7" style="padding-left: 60px;">
+                                <label>Port Destination</label>
+                                <input type="text" class="form-control" formControlName="portDestination">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row" style="margin-top: 50px;">
+                <div class="col-md-12">
+                    <label class="subTitle">Package Detials<span class="hr"> ___________________________________________________________________________________________________________________________________</span></label>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="email">Gross Weight</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="">Unit</label>
+                            <select class="form-control">
+                              <option *ngFor="let unit of weight" [value]="unit.value">{{ unit.viewValue }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="name">Shipper Name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="email">Shipper Email</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="name">Pick Up Address</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="name">Destination Address</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="">Commodity</label>
+                            <select class="form-control">
+                              <option *ngFor="let commodity of commodities" [value]="commodity.value">{{ commodity.viewValue }}</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="">Transit Insurance</label>
+                            <select class="form-control">
+                              <option *ngFor="let i of insurance" [value]="i.value">{{ i.viewValue }}</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div *ngIf="eForm.value.mot == 'Sea' && eForm.value.type == 'LCL'">
+                        <div class="form-group col-md-5" style="padding-left: 0;">
+                            <label for="CBM">CBM</label>
+                            <input type="number" class="form-control">
+                        </div>
+                        <div class="form-group col-md-5" style="padding-left: 0;">
+                            <button class="btn btn-dark" type="button" (click)="onCalculateCBM()">Calculate CBM</button>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top: 50px;" *ngIf="showElement">
+                        <form [formGroup]="cbmForm">
+                            <div class="col-md-12" style="padding-left: 0;">
+                                <label class="subTitle">Calculate CBM<span class="hr"> ___________________________________________________________________________________________________________________________________</span></label>
+                                <div class="form-row" *ngFor="let form of formArray;">
+                                    <div class="form-group col-md-2">
+                                        <label for="name">Length</label>
+                                        <input type="number" class="form-control" formControlName="length" [(ngModel)]="length">
+                                    </div>
+                                    <div class="form-group col-md-0">
+                                        <label for="">Unit</label>
+                                        <select class="form-control">
+                                            <option *ngFor="let dimension of dimensions" [value]="dimension.value">{{ dimension.viewValue }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="name">Height</label>
+                                        <input type="number" class="form-control" formControlName="height" [(ngModel)]="height">
+                                    </div>
+                                    <div class="form-group col-md-0">
+                                        <label for="">Unit</label>
+                                        <select class="form-control">
+                                            <option *ngFor="let dimension of dimensions" [value]="dimension.value">{{ dimension.viewValue }}</option>                                    </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="name">Width</label>
+                                        <input type="number" class="form-control" formControlName="width" [(ngModel)]="width">
+                                    </div>
+                                    <div class="form-group col-md-0">
+                                        <label for="">Unit</label>
+                                        <select class="form-control">
+                                            <option *ngFor="let dimension of dimensions" [value]="dimension.value">{{ dimension.viewValue }}</option>                                    </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="name">Number of Packages</label>
+                                        <input type="number" class="form-control" name="numberOfPackage" formControlName="numberOfPackage">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3" style="padding-top: 23px;">
+                                        <button (click)="onAddDimension()" class="btn btn-dark">Add more dimensions</button>
+                                    </div>
+                                    <div class="col-md-3" style="padding-top: 23px;">
+                                        <button (click)="calculate()" class="btn btn-dark">Calculate</button>
+                                    </div>
+                                    <div class="col-md-3" style="padding-top: 23px;">
+                                        <button (click)="onReset(cbmForm)" class="btn btn-dark">Reset</button>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="name">CBM Value</label>
+                                        <input type="text" class="form-control" name="CBMValue" formControlName="CBMValue" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div *ngIf="eForm.value.mot == 'Sea' && eForm.value.type == 'FCL'" class="form-row" style="margin-top: 50px;">
+                        <div class="col-md-12">
+                            <label class="subTitle">Equipment<span class="hr"> ___________________________________________________________________________________________________________________________________</span></label>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_flat_all_type_20.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_flat_all_type_40.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_flat_collapsible_platform_20.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_flat_collapsible_platform_40.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_general_purpose_container_20.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_general_purpose_container_40.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_high_cube_general_purpose_container_40.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_high_cube_general_purpose_container_45.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_open_top_container_20.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_open_top_container_40.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_refrigerated_container_20.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <img src="../../assets/images/guruashish_refrigerated_container_40.png" style="width: 100%; height:200px;" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6" style="padding-left: 0;">
+                        <label for="comment">Comments</label>
+                        <input type="text" class="form-control">
+                    </div>                       
+                    <div class="col-md-4">
+                        <label for=""><span>Attachments</span></label>
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>                          
+                    
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+.title{
+    margin-top: 50px;
+}
+
+.container {
+    display: grid;
+}
+.form-body {
+    margin: 20px 35px;
+}
